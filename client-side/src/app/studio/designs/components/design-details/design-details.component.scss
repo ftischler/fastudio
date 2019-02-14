@@ -1,0 +1,41 @@
+mat-spinner {
+  margin: auto;
+  width: 50%;
+}
+mat-card {
+  margin-bottom: 8px;
+  h5 {
+    color: red;
+    margin-left: 40%;
+  }
+}
+mat-form-field {
+  max-width: 80%;
+}
+.close {
+  color: rgb(180, 23, 23);
+  margin: 0 20% 5px 80%;
+  border: none;
+}
+.design {
+  p {
+    font-size: 1.3em;
+    word-spacing: -0.1em;
+  }
+}
+.det {
+  font-size: 1rem;
+  line-height: 25px;
+}
+.success {
+  color: rgb(6, 252, 149);
+  text-align: justify;
+  padding: 2px;
+  border: 5px dotted rgb(6, 252, 149);
+}
+.error {
+  color: red;
+  text-align: justify;
+  padding: 2px;
+  border: 5px dotted red;
+}

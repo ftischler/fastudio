@@ -1,0 +1,38 @@
+<mat-card>
+    <h2>Feedback</h2>
+    <form
+      class="form-container"
+      [formGroup]="feedbackForm"
+      novalidate
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field color="primary">
+        <input matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="feedbackForm.controls.name.invalid && feedbackForm.controls.name.touched">enter a name</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <input matInput type="email" placeholder="Email" formControlName="email" />
+        <mat-error *ngIf="feedbackForm.controls.email.invalid && feedbackForm.controls.email.touched">enter a valid email</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <span matPrefix>+&nbsp;</span>
+        <input matInput placeholder="Tel" formControlName="tel" type="tel">
+        <mat-error *ngIf="feedbackForm.controls.tel.invalid && feedbackForm.controls.tel.touched">enter a valid phone number</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <textarea matInput placeholder="Message" formControlName="message"></textarea>
+        <mat-error *ngIf="feedbackForm.controls.message.invalid && feedbackForm.controls.message.touched">enter a detailed message</mat-error>
+      </mat-form-field><br>
+
+      <div class="success" *ngIf="success == true">
+        <h4>We appriciate your feedback. Thank You!</h4>
+      </div><br>
+      <span *ngIf="click == true">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </span>
+      <div class="error" *ngIf="sendError && success == false">
+        <h4>{{sendError}}</h4>
+      </div><br>
+      <button mat-raised-button [disabled]="click == true ||feedbackForm.invalid" type="submit" color="accent">Submit</button>
+    </form>
+  </mat-card>

@@ -1,0 +1,30 @@
+<div class="toolbar">
+  <button
+    color="accent"
+    mat-button
+    (click)="toggleSidenav.emit()"
+    class="sidenav-toggle"
+  >
+    <i class="fas fa-bars"></i>
+  </button>
+  <span class="cname"><i class="fas fa-tshirt"></i> Fastudio </span>
+  <div class="action">
+    <a routerLink="/dashboard/enquiries"
+      ><i
+        class="fas fa-bell"
+        *ngIf="authService.loggedIn() && newEnquiries?.length == 0"
+      ></i
+    ></a>
+    <a routerLink="/dashboard/enquiries"
+      ><i
+        class="fas fa-bell"
+        matBadge="{{ newEnquiries.length }}"
+        matBadgeColor="warn"
+        *ngIf="authService.loggedIn() && newEnquiries?.length > 0"
+      ></i
+    ></a>
+    <a routerLink="/dashboard/profile"
+      ><i class="fas fa-user-circle" *ngIf="authService.loggedIn()"></i
+    ></a>
+  </div>
+</div>

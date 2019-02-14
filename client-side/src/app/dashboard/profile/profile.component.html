@@ -1,0 +1,46 @@
+<mat-spinner color="accent" [diameter]="30" *ngIf="!userData"></mat-spinner>
+<section *ngIf="userData">
+  <div class="notice" *ngIf="notice == true">
+    <button mat-button 
+    class="close" 
+    (click)="notice = false" 
+    matTooltip="close">
+      <i class="fas fa-times"></i>
+    </button>
+    {{userData?.notice}}
+  </div>
+  <mat-card>
+    <img src="../../../assets/images/logo.png" width="100px" alt="profile image"><br>
+    <h3>{{userData.firstname + ' ' + userData.lastname}}</h3><br>
+    <h6 *ngIf="active == true">Status:&nbsp; <span class="active">Active</span></h6>
+    <h6 *ngIf="active == false">Status:&nbsp; <span class="inactive">Inactive</span></h6>
+    <h5>Subscription Expires:&nbsp; {{TimeFromNow(subscription[0].end)}}</h5>
+    <div class="details">
+      <h4><i class="fas fa-envelope">&nbsp;</i>Email: {{userData.email}}</h4><br>
+      <h4><i class="fas fa-mobile-alt">&nbsp;</i>Phone: {{'+' + userData.country.callingCodes[0] + userData.phone}}</h4><br>
+      <h4><i class="fas fa-address-card">&nbsp;</i>BusinessName: {{userData.businessname}}</h4><br>
+      <h4><i class="fas fa-globe-africa">&nbsp;</i>Location: {{userData.city + ',' + ' ' + userData.state + ',' + ' ' + userData.country.name}}</h4><br>
+      <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Address: {{userData.address}}</h4><br>
+      <h4><i class="fas fa-male">&nbsp;</i>Gender: {{userData.sex}}</h4><br>
+      <h4><i class="fas fa-birthday-cake">&nbsp;</i>DOB: {{userData.dob | date: 'mediumDate'}}</h4><br>
+      <h4><i class="far fa-clock">&nbsp;</i>Registered: {{TimeFromNow(userData.registered)}}</h4><br>
+      <h4><i class="fas fa-check">&nbsp;</i>Last Login: {{TimeFromNow(userData.lastLogin)}}</h4><br>
+      <div class="link">
+        Portfolio link:<br>
+        <span><input type="text" value="{{userData.portfolioUrl}}" disabled/></span><br>
+        <!-- <span>{{userData.portfolioUrl}}</span><br>  -->
+        <p>
+          share via:
+          <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+          <a href="https://facebook.com/"><i class="fab fa-facebook"></i></a>
+          <a href="https://wa.me/?text=Hello,%20Ckeckout%20my%20portfolio%20on%20Fastudio%20{{userData.portfolioUrl}}"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+        </p>
+      </div>
+    </div>
+    <div class="action">
+      <button mat-button (click)="changePassword()" color="primary">Change Password</button>
+      <button class="edit" (click)="editProfile()" mat-raised-button color="accent">Update Profile</button>
+    </div>
+  </mat-card>
+</section>

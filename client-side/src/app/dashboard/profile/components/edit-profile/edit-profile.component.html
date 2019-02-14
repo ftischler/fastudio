@@ -1,0 +1,58 @@
+<mat-dialog-content>
+  <mat-card>
+    <div>
+      <form class="form-container" [formGroup]="userForm" (ngSubmit)="onSubmit()">        
+        <!-- Nigeria states -->
+        <mat-form-field *ngIf="data?.userData.country.name == 'Nigeria'" color="primary">
+          <i matPrefix class="fas fa-map-marker-alt">&nbsp;</i>
+          <mat-select formControlName="state" placeholder="Select State">
+            <mat-option *ngFor="let state of states" [value]="state">
+              {{state}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.controls.state.invalid && userForm.controls.state.touched">select a valid
+            state</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field *ngIf="data?.userData.country.name != 'Nigeria'" color="primary">
+          <i matPrefix class="fas fa-map-marker-alt">&nbsp;</i>
+          <input matInput placeholder="State" formControlName="state">
+          <mat-error *ngIf="userForm.controls.state.invalid && userForm.controls.state.touched">enter your state</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="far fa-building">&nbsp;</i>
+          <input matInput placeholder="City" formControlName="city">
+          <mat-error *ngIf="userForm.controls.city.invalid && userForm.controls.city.touched">city is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-phone"><Span>+{{ data?.userData.country.callingCodes[0] }}</Span>&nbsp;</i>
+          <input matInput #phone placeholder="Phone" formControlName="phone" type="tel">
+          <!-- <mat-hint align="end">{{phone.value.length}} /10</mat-hint> -->
+          <mat-error *ngIf="userForm.controls.phone.invalid && userForm.controls.phone.touched">phone is required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-map-marked-alt">&nbsp;</i>
+          <input matInput placeholder="Address" formControlName="address">
+          <mat-error *ngIf="userForm.controls.address.invalid && userForm.controls.address.touched">address is required</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button type="reset" [mat-dialog-close]="false">
+            Cancel
+          </button>
+          <button mat-raised-button [disabled]="click == true || !userForm.valid" type="submit" color="accent">
+            Update
+          </button>
+        </div>
+      </form>
+    </div>
+    <span *ngIf="click == true">
+      <mat-spinner [diameter]="20"></mat-spinner>
+    </span>
+    <div class="error" *ngIf="error && success == false">
+      <h4>{{error}}</h4>
+    </div><br>
+  </mat-card>
+</mat-dialog-content>

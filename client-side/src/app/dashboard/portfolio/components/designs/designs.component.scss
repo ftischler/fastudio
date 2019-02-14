@@ -1,0 +1,79 @@
+mat-toolbar > button {
+  margin-left: 45px;
+  .fas {
+    color: white;
+  }
+}
+mat-toolbar {
+  span {
+    color: #da3a75;
+    background: rgba(247, 246, 246, 0.87);
+    padding: 8px;
+    border-radius: 5px;
+  }
+}
+mat-toolbar > mat-form-field {
+  max-width: 70%;
+  font-size: 0.8em !important;
+}
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+  margin: 0 auto;
+  max-width: 95%;
+}
+mat-card {
+  margin: 10px 0;
+  max-width: 700px;
+}
+mat-card-actions {
+  .far {
+    font-size: 20px;
+  }
+}
+.empty {
+  margin: 10px;
+  text-align: center;
+  padding: auto;
+}
+mat-spinner {
+  margin: auto;
+  width: 50%;
+}
+.loading {
+  height: 77vh;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  width: 50%;
+}
+.more {
+  text-align: center;
+  margin: 10px;
+}
+.row {
+  display: flex;
+  .img {
+    // max-width: 150px;
+    // max-height: 150px;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  .cols {
+    flex: 33.33%;
+    padding: 3px;
+    p {
+      font-size: 1.5em;
+    }
+    h5 {
+      font-size: 1em;
+      color: red;
+      float: right;
+    }
+  }
+}
+img {
+  width: 100%;
+}

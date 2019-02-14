@@ -1,0 +1,72 @@
+mat-card {
+  margin: 20px 0;
+  overflow: auto;
+  text-align: center;
+  padding: 2em 0;
+  color: #0a0a0a;
+  border-radius: 15px;
+  background-color: rgba(255, 254, 254, 0.726);
+  .details {
+    margin: 20px;
+    text-align: left;
+  }
+  img {
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+  }
+  .edit {
+    color: white !important;
+  }
+  button {
+    margin-right: 10px;
+  }
+}
+h6 {
+  .active {
+    color: #64ffaa;
+  }
+  .inactive {
+    color: red;
+  }
+}
+.notice {
+  background: rgba(165, 162, 162, 0.836);
+  border-radius: 10px;
+  padding: 0 10px 10px 10px;
+  margin: 5px 20px;
+  text-align: center;
+  color: rgb(134, 44, 44);
+  .close {
+    color: rgb(180, 23, 23);
+    margin: 0 15% 1px 85%;
+    border: none;
+  }
+}
+.link {
+  text-align: center;
+  font-size: 1em;
+  p > a {
+    color: #d81b60;
+    font-size: 20px;
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  span {
+    input[type='text'] {
+      width: 100%;
+      font-size: 0.8em;
+      border: none;
+      padding: 5px 2px;
+      color: rgb(64, 64, 224) !important;
+    }
+  }
+}
+mat-spinner {
+  height: 77vh;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  padding-top: 50px;
+  width: 50%;
+}

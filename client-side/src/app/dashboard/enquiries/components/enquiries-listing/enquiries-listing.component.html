@@ -1,0 +1,79 @@
+<mat-toolbar>
+  <h3>Enquiries</h3>
+</mat-toolbar>
+<mat-form-field>
+  <i matPrefix class="fas fa-search">&nbsp;</i>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
+<section>
+  <mat-spinner class="loading" color="accent" [diameter]="30" *ngIf="dataSource == null"></mat-spinner>
+  <mat-card class="empty" *ngIf="length == 0">
+    <h5>There are no enquiries yet, share your public portfolio link from your profile with family and friends to get started.</h5>
+  </mat-card>
+  <div *ngIf="dataSource != null && length != 0" class="table-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSource">
+
+      <!-- client Column -->
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef> Client </mat-header-cell>
+        <mat-cell class="client" *matCellDef="let enquiry">
+          <div class="name">
+            <span><i class="far fa-square" aria-hidden="true">&nbsp;</i></span>{{ enquiry.client }}
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- category Column -->
+      <ng-container matColumnDef="class">
+        <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+        <mat-cell *matCellDef="let enquiry">{{ 'Size' + '-' + enquiry.size }}</mat-cell>
+      </ng-container>
+
+      <!-- status Column -->
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+        <mat-cell *matCellDef="let enquiry">
+          <span class="warn" *ngIf="enquiry.closed === false">
+            <i>pending...</i>
+          </span>
+          <span class="accent" *ngIf="enquiry.closed === true">
+            <i>completed.</i>
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <mat-cell *matCellDef="let enquiry">
+          <button mat-icon-button class="action" [matMenuTriggerFor]="menu">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button mat-menu-item color="primary"
+            (click)="detailsBtnHandler(enquiry)"
+            matTooltip="Open details">
+              <i class="far fa-caret-square-down" aria-hidden="true">&nbsp;Open</i>
+            </button>
+            <button mat-menu-item color="accent" 
+            *ngIf="enquiry.closed === false"
+            (click)="closeBtnHandler(enquiry.enquiryId)"
+            matTooltip="Close completed enquiry">
+              <i class="far fa-check-circle" aria-hidden="true">&nbsp;Close</i>
+            </button>
+            <button mat-menu-item color="accent" 
+            *ngIf="enquiry.closed === false"
+            (click)="deleteBtnHandler(enquiry.enquiryId)"
+            matTooltip="Close completed enquiry">
+              <i class="far fa-trash-alt" aria-hidden="true">&nbsp;Delete</i>
+            </button>
+          </mat-menu>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="[10, 20, 30, 40, 50]" showFirstLastButtons></mat-paginator>
+  </div>
+</section>

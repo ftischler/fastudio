@@ -1,0 +1,92 @@
+<button mat-button class="close" (click)="closeBtn()" matTooltip="close design review">
+  <i class="fas fa-times">&nbsp;close</i>
+</button>
+<mat-dialog-content>
+  <mat-spinner [diameter]="20" *ngIf="!design"></mat-spinner>
+  <mat-card *ngIf="design">
+    <img mat-card-image src="{{design?.imgUrl}}" alt="{{design?.category}}" />
+    <h5>Worth:&nbsp;<i>{{design?.priceWorth | number}}&nbsp;{{design?.designerCountry.currencies[0].code}}</i></h5>
+    <mat-card-content class="design">
+      <p><i>{{ design?.description }}</i></p>
+    </mat-card-content>
+    <mat-card-actions class="det">
+      <i class="fas fa-bullseye">&nbsp;{{ design?.category }}</i><br>
+      <i class="fas fa-male">&nbsp;{{ design?.gender + ',' + ' ' + design?.subCategory }}</i><br>
+      <i class="fas fa-address-card">&nbsp;{{ design?.designer }}</i><br>
+      <i class="fas fa-envelope">&nbsp;{{ design?.designerEmail }}</i><br>
+      <i class="fas fa-mobile-alt">
+        &nbsp;+{{ design?.designerCountry.callingCodes[0] + design?.designerPhone }}
+      </i><br>
+      <i class="fas fa-map-marker-alt">&nbsp;{{ design?.designerAddress }}</i><br>
+      <i class="fas fa-globe-africa">&nbsp;{{ design?.designerCity }},
+        &nbsp;{{ design?.designerState }},&nbsp;{{ design?.designerCountry.name }}</i>
+    </mat-card-actions>
+  </mat-card>
+  <div class="request">
+    <h3>Request this design</h3>
+    <form
+      class="form-container"
+      [formGroup]="requestForm"
+      novalidate
+      (ngSubmit)="onSubmit()"
+    >
+      <mat-form-field color="primary">
+        <input (keyup)="success = false" matInput placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="requestForm.controls.name.invalid && requestForm.controls.name.touched">enter a name</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <input matInput type="email" placeholder="Email" formControlName="email" />
+        <mat-hint align="end">Optional but recommended</mat-hint>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <mat-select [(value)]="selected" formControlName="country" placeholder="Select Country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{country.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="requestForm.controls.country.invalid && requestForm.controls.country.touched">select your country</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <span matPrefix>+{{selected?.callingCodes[0]}}&nbsp;</span>
+        <input matInput #phone placeholder="Phone" formControlName="phone" type="tel">
+        <!-- <mat-hint align="end">{{phone.value.length}} /10</mat-hint> -->
+        <mat-error *ngIf="requestForm.controls.phone.invalid && requestForm.controls.phone.touched">enter a valid phone number</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <mat-select formControlName="gender" placeholder="Gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender">
+            {{gender}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="requestForm.controls.gender.invalid && requestForm.controls.gender.touched">gender is required</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <input matInput #size placeholder="Size" formControlName="size" type="number">
+        <mat-hint align="end">Specify your accurate size</mat-hint>
+        <mat-error *ngIf="requestForm.controls.size.invalid && requestForm.controls.size.touched">Enter a valid size number</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <textarea matInput placeholder="Address" formControlName="address"></textarea>
+        <mat-hint align="end">Provide detailed address</mat-hint>
+        <mat-error *ngIf="requestForm.controls.address.invalid && requestForm.controls.address.touched">Enter a detailed address</mat-error>
+      </mat-form-field><br>
+      <mat-form-field color="primary">
+        <textarea matInput placeholder="Message" formControlName="message"></textarea>
+        <mat-hint align="end">Tell me something (specify if you have a sewing material or not), i'm your designer.</mat-hint>
+        <mat-error *ngIf="requestForm.controls.message.invalid && requestForm.controls.message.touched">write a detailed message</mat-error>
+      </mat-form-field><br>
+    </form>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="success" *ngIf="success == true">
+    <span>Success! Your request has been sent for processing.</span>
+  </div><br>
+  <span *ngIf="click == true">
+    <mat-spinner [diameter]="20"></mat-spinner>
+  </span>
+  <div class="error" *ngIf="regError && success == false">
+    <span>{{regError}}</span>
+  </div><br>
+  <button class="submit" mat-raised-button [disabled]="requestForm.invalid" (click)="onSubmit()" type="submit" color="accent">Submit</button>
+</mat-dialog-actions>

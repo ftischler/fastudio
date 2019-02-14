@@ -1,0 +1,9 @@
+{
+	"editor.wordWrap": "on",
+	"editor.tabSize": 2,
+	"prettier.eslintIntegration": true,
+	"prettier.tslintIntegration": true,
+	"editor.formatOnSave": true,
+	"eslint.autoFixOnSave": true,
+	"eslint.alwaysShowStatus": true
+}

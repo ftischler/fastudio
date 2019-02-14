@@ -1,0 +1,54 @@
+<mat-dialog-content>
+  <mat-card>
+    <h5>Select design Image</h5>
+    <form class="form-container" [formGroup]="designForm" novalidate (ngSubmit)="onSubmit()">
+      <input [disabled]="data" type="file" accept="image/*" ng2FileSelect [uploader]="uploader" (onFileSelected)="OnFileSelected($event)" />
+      <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+      <i>NB: Seek permission from any face(s) that appears on your design before uploading for privacy reasons.</i>
+      <mat-form-field color="primary">
+        <input matInput placeholder="Description" formControlName="description">
+        <mat-error *ngIf="designForm.controls.description.invalid && designForm.controls.description.touched">enter a brief design description</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field color="primary">
+        <mat-select formControlName="category" placeholder="Select Category">
+          <mat-option *ngFor="let category of categories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field color="primary">
+        <mat-select formControlName="subCategory" placeholder="Select sub Category">
+          <mat-option *ngFor="let subCategory of subCategories" [value]="subCategory">
+            {{subCategory}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field color="primary">
+        <mat-select formControlName="gender" placeholder="Select Gender">
+          <mat-option *ngFor="let gender of genders" [value]="gender">
+            {{gender}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <mat-form-field color="primary">
+        <!-- <span matPrefix>{{design?.designerCountry.currencies[0].symbol}}&nbsp;</span> -->
+        <input type="number" matInput placeholder="Price-Worth" formControlName="priceWorth">
+        <span matSuffix>.00</span>
+        <mat-hint align="end">Enter price in your local currency</mat-hint>
+      </mat-form-field>
+      <mat-error *ngIf="regError">{{ regError }}</mat-error>
+      <span *ngIf="regClick == true">
+        <mat-spinner [diameter]="20"></mat-spinner>
+      </span>
+      <div>
+        <button mat-raised-button [disabled]="regClick == true || !designForm.valid" type="submit" color="accent">Save</button>
+        <button mat-raised-button type="reset" [mat-dialog-close]="false">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
+</mat-dialog-content>
+

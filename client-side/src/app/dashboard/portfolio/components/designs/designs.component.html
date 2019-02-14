@@ -1,0 +1,48 @@
+<mat-toolbar>
+  <h2>Portfolio Designs<span>{{userData?.designs.length}}</span></h2>
+  <button mat-mini-fab color="accent" (click)="openDesignForm()">
+    <i class="fas fa-plus"></i>
+  </button>
+</mat-toolbar>
+<mat-toolbar>
+  <mat-form-field color="primary">
+    <i matPrefix class="fas fa-search">&nbsp;</i>
+    <input matInput placeholder="Search" [(ngModel)]="search" />
+  </mat-form-field>
+</mat-toolbar>
+<section>
+  <mat-spinner class="loading" [diameter]="30" *ngIf="loading == true" color="accent"></mat-spinner>
+  <mat-card class="empty" *ngIf="loading == false && designs.length == 0">
+    <h5>Portfolio is currently empty! click the add button to start uploading your designs</h5>
+  </mat-card>
+  <section *ngIf="designs.length != 0">
+    <mat-card class="designs" *ngFor="let design of designs | filter:search">
+      <div class="row">
+        <img
+          class="img cols"
+          src="http://res.cloudinary.com/niexsontech/image/upload/w_150,h_150,c_pad,b_white/v{{design?.imgVersion}}/{{design?.imgId}}"
+          alt="{{design.description}}"
+        />
+        <mat-card-content class="cols">
+          <p><i>{{ design.description }}</i></p>
+          <h3>{{ design.category }}</h3>
+          <h4>{{ TimeFromNow(design.created) }}</h4>
+          <h5><i>{{design.priceWorth | number}}&nbsp;{{userData?.country.currencies[0].code}}</i></h5>
+        </mat-card-content>
+      </div>
+      <mat-card-actions align="end">
+        <button mat-icon-button (click)="editBtnHandler(design._id)">
+          <i class="far fa-edit"></i>
+        </button>
+        <button mat-icon-button (click)="deleteBtnHandler(design._id)"> 
+          <i class="far fa-trash-alt"></i>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div class="more">
+      <mat-spinner [diameter]="20" *ngIf="spinner == true"></mat-spinner>
+      <button *ngIf="all == false" mat-stroked-button color="primary" (click)="openMore()">load More...</button>
+    </div>
+  </section>
+</section>
+

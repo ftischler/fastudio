@@ -1,0 +1,256 @@
+<mat-progress-bar color="primary" *ngIf="BtnClick == true" mode="indeterminate"></mat-progress-bar>
+<div class="header">
+  <div class="overlay">
+    <div class="intro">
+      <span>Fashion Studio</span>
+      <p>
+        No 1 online fashion studio in Africa showcasing Africa's beauty in fashion designing and styles carved by wonderful designers across Africa.
+      </p>
+    </div>
+    <div class="actionBtn">
+      <button mat-raised-button color="accent" (click)="btnClick()" [routerLink]="['/studio']">
+        Explore Designs
+      </button><br>
+      <button *ngIf="!authService.loggedIn()" mat-raised-button color="accent" (click)="click = !click">Get-Started as a designer</button>
+      <button *ngIf="authService.loggedIn()" mat-raised-button color="accent" routerLink="/dashboard/portfolio" (click)="btnClick()">Goto Portfolio</button>
+    </div>
+  </div>
+</div>
+<mat-card *ngIf="click == true" class="login">
+  <mat-tab-group animationDuration="1500ms">
+    <!-- sign In form -->
+    <mat-tab label="SignIn">
+      <img src="assets/images/logo.png" width="100px" class="user-avatar" />
+      <form class="form-container" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-progress-bar *ngIf="submitted == true" mode="buffer"></mat-progress-bar>
+        <mat-progress-bar *ngIf="submitted == true" mode="indeterminate"></mat-progress-bar>
+        <mat-form-field color="accent">
+          <i matPrefix class="fas fa-envelope">&nbsp;</i>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched">email is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <i matPrefix class="fa fa-unlock-alt">&nbsp;</i>
+          <input matInput placeholder="Password" type="password" formControlName="password">
+          <mat-error *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">password is
+            required</mat-error>
+        </mat-form-field>
+
+        <div>
+          <mat-hint class="txt2" align="end"><a (click)="forgetPassword()">
+              Forgot email/password?
+            </a></mat-hint>
+          <mat-error *ngIf="error">{{ error }}</mat-error>
+          <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+              <div class="login100-form-bgbtn"></div>
+              <button type="submit" class="login100-form-btn">
+                Login
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="txt1">
+          <span>
+            OR<br> Sign In Using
+          </span>
+        </div>
+
+        <div class="flex-c-m">
+          <a href="#" class="login100-social-item bg1">
+            <i class="fab fa-facebook"></i>
+          </a>
+
+          <a href="#" class="login100-social-item bg2">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <a href="#" class="login100-social-item bg3">
+            <i class="fab fa-google"></i>
+          </a>
+        </div>
+      </form>
+    </mat-tab>
+    <!-- sign up form -->
+    <mat-tab label="SignUp">
+      <form class="form-container" *ngIf="!success" [formGroup]="userForm" novalidate (ngSubmit)="userOnSubmit()">
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-user-circle">&nbsp;</i>
+          <input matInput placeholder="FirstName" formControlName="firstname">
+          <mat-error *ngIf="userForm.controls.firstname.invalid && userForm.controls.firstname.touched">firstname is
+            required</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-user">&nbsp;</i>
+          <input matInput placeholder="LastName" formControlName="lastname">
+          <mat-error *ngIf="userForm.controls.lastname.invalid && userForm.controls.lastname.touched">lastname is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-male">&nbsp;</i>
+          <mat-select formControlName="sex" placeholder="Sex">
+            <mat-option *ngFor="let sex of sexs" [value]="sex.value">
+              {{sex.viewValue}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.controls.sex.invalid && userForm.controls.sex.touched">sex is required</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-calendar-alt">&nbsp;</i>
+          <input matInput [matDatepicker]="dob" placeholder="Date of Birth" formControlName="dob">
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+          <mat-error *ngIf="userForm.controls.dob.invalid && userForm.controls.dob.touched">select a valid date</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-address-card">&nbsp;</i>
+          <input matInput placeholder="BusinessName" formControlName="businessname">
+          <mat-error *ngIf="userForm.controls.businessname.invalid && userForm.controls.businessname.touched">business name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-envelope">&nbsp;</i>
+          <input matInput #email placeholder="Email" formControlName="email" type="email">
+          <mat-error *ngIf="userForm.controls.email.invalid && userForm.controls.email.touched">email is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-globe-africa">&nbsp;</i>
+          <mat-select [(value)]="selected" formControlName="country" placeholder="Select Country">
+            <mat-option *ngFor="let country of countries" [value]="country">
+              {{country.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.controls.country.invalid && userForm.controls.country.touched">select your country</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-phone"><Span>+{{selected?.callingCodes[0]}}</Span>&nbsp;</i>
+          <input matInput #phone placeholder="Phone" formControlName="phone" type="tel">
+          <mat-hint align="end">NB: Verification code will be sent to this number</mat-hint>
+          <mat-error *ngIf="userForm.controls.phone.invalid && userForm.controls.phone.touched">phone is required</mat-error>
+        </mat-form-field>
+    
+        <!-- Nigeria states -->
+        <mat-form-field *ngIf="userForm.controls.country.value?.name == 'Nigeria'" color="primary">
+          <i matPrefix class="fas fa-map-marker-alt">&nbsp;</i>
+          <mat-select formControlName="state" placeholder="Select State">
+            <mat-option *ngFor="let state of states" [value]="state">
+              {{state}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.controls.state.invalid && userForm.controls.state.touched">select a valid
+            state</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field *ngIf="userForm.controls.country.value?.name != 'Nigeria'" color="primary">
+          <i matPrefix class="fas fa-map-marker-alt">&nbsp;</i>
+          <input matInput placeholder="State" formControlName="state">
+          <mat-error *ngIf="userForm.controls.state.invalid && userForm.controls.state.touched">enter your state</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="far fa-building">&nbsp;</i>
+          <input matInput placeholder="City" formControlName="city">
+          <mat-error *ngIf="userForm.controls.city.invalid && userForm.controls.city.touched">city is required</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field color="primary">
+          <i matPrefix class="fas fa-map-marked-alt">&nbsp;</i>
+          <input matInput placeholder="Address" formControlName="address">
+          <mat-error *ngIf="userForm.controls.address.invalid && userForm.controls.address.touched">address is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary">
+          <i matPrefix class="fa fa-unlock-alt">&nbsp;</i>
+          <input matInput #password minlength="8" type="password" placeholder="Password" formControlName="password">
+          <mat-hint align="end">minimum of 8 characters</mat-hint>
+          <mat-error *ngIf="userForm.controls.password.invalid && userForm.controls.password.touched">password is required</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field color="primary">
+          <i matPrefix class="fa fa-key">&nbsp;</i>
+          <input matInput #confirmPassword minlength="8" type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+          <mat-error *ngIf="userForm.controls.confirmPassword.invalid && userForm.controls.confirmPassword.touched">mix-matched password
+          </mat-error>
+        </mat-form-field>
+    
+        <mat-checkbox formControlName="oath">I agree with the <a class="link" (click)="terms()">Terms of use!</a></mat-checkbox>
+        <mat-error *ngIf="regError">{{ regError }}</mat-error>
+        <span *ngIf="regClick == true">
+          <mat-spinner [diameter]="20"></mat-spinner>
+        </span>
+        <div>
+          <button mat-raised-button (click)="resetForm()" type="reset">Reset</button>
+          <button mat-raised-button [disabled]="regClick == true || !userForm.valid" type="submit" color="accent">Register</button>
+        </div>
+      </form>
+      <div class="verification" *ngIf="success == true">
+        <div class="success" *ngIf="verified == false">
+          <p>Registration Successsful!<br>A verification code has been sent to 
+            <i>"{{'+' + selected?.callingCodes[0] + userForm.controls.phone.value}}",</i> Check your message inbox and enter the code recieved below to verify your account and access your portfolio.</p><br>
+            <mat-error>
+              Note: Verification code may take a few seconds to arrive.<br>
+              if the mobile number above is not yours, contact the Fastudio team with the contact details at the end of this page for verification.
+            </mat-error>
+          <form class="form-container" [formGroup]="tokenForm" novalidate (ngSubmit)="verifyMe()">
+            <mat-form-field color="primary">
+              <input matInput type="number" placeholder="Verification code" formControlName="token">
+              <mat-hint align="end">Enter code here</mat-hint>
+              <mat-error *ngIf="tokenForm.controls.token.invalid && tokenForm.controls.token.touched">verification code is required
+              </mat-error>
+            </mat-form-field>
+            <mat-error *ngIf="verifyError">{{ verifyError }}</mat-error>
+            <span *ngIf="verifyClick == true">
+              <mat-spinner [diameter]="20"></mat-spinner>
+            </span>
+            <div>
+              <button mat-raised-button [disabled]="verifyClick == true || !tokenForm.valid" type="submit" color="accent">VerifyMe</button>
+            </div>
+          </form>
+        </div>
+        <div class="success" *ngIf="verified == true">
+          <mat-icon class="coreIcon">check_circle_outline</mat-icon>
+          <p>Verification Successful, proceed to your portfolio by signing in.<br>Welcome on board.</p>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+<h2>Our Services</h2>
+<div class="core">
+  <mat-card class="showcase txt">
+    <!-- <i class="coreIcon fas fa-layer-group"></i> -->
+    <img src="../../assets/images/showcase.png" width="120px" alt="showcase">
+    <h3>Showcase</h3>
+    <p class="ptxt">Africa's uniqueness can be seen through its various art forms, paintings and most expecially its vibrant fashion which has recently begun to get the attention of the world.<br>Deploy your designs to fastudio today and be glad you did.</p>
+  </mat-card>
+  <mat-card class="explore txt">
+    <!-- <i class="coreIcon fas fa-location-arrow"></i> -->
+    <img src="../../assets/images/explore.png" width="150px" alt="explore">
+    <h3>Explore</h3>
+    <p class="ptxt">Explore the studio today and checkout amazing designs from the best of Africa's fashion designers with just a button click (Sew on the go!).</p>
+  </mat-card>
+  <mat-card class="network txt">
+    <!-- <i class="coreIcon fas fa-bezier-curve"></i> -->
+    <img src="../../assets/images/colaborate.png" width="200px" alt="Collaborate">
+    <h3>Collaborate</h3>
+    <p class="ptxt">Collaboration and networking with fellow designers across Africa just got easier with fastudio. This is The Designers Network (TDN).</p>
+  </mat-card>
+</div>
+<div class="info">
+  <p>For more enquires and partnerships,<br>contact the team at hello@fastudio.com.ng</p>
+  OR
+  <p>via mobile: +2348124188003</p>
+  <p>
+    <a href="https://instagram.com/fastudiong"><i class="fab fa-instagram"></i></a>
+  <a href="https://facebook.com/fastudioNG"><i class="fab fa-facebook"></i></a>
+  <a href="https://wa.me/2348124188003?text=Hello,%20Fastudio%20team"><i class="fab fa-whatsapp"></i></a>
+  <a href="https://twitter.com/fastudioNG"><i class="fab fa-twitter"></i></a>
+  </p>
+</div>

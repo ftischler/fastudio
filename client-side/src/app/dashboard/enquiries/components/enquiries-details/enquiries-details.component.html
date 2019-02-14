@@ -1,0 +1,26 @@
+<button mat-button class="close" (click)="closeBtn()" matTooltip="close enquiry review">
+  <i class="fas fa-times">&nbsp;close</i>
+</button>
+<mat-dialog-content>
+  <mat-spinner [diameter]="20" *ngIf="!enquiry"></mat-spinner>
+  <mat-card *ngIf="enquiry">
+    <img class="img" src="{{enquiry.design.imgUrl}}" alt="{{enquiry.design.category}}" />
+    <h5>Worth:&nbsp;<i>{{enquiry.design.priceWorth | number}}&nbsp;{{userData.country.currencies[0].code}}</i></h5>
+    <mat-card-content class="design">
+      <p><i>{{ enquiry.design.description }}</i></p>
+    </mat-card-content>
+    <mat-card-actions class="det">
+      <h4>Client Details:</h4>
+      <i class="fas fa-user-circle">&nbsp;{{ enquiry.client }}</i><br>
+      <i class="fas fa-bullseye">&nbsp;{{ enquiry.gender + ' ' + '-' + ' ' + 'Size ' + enquiry.size }}</i><br>
+      <i class="fas fa-mobile-alt">&nbsp;{{ '+' + enquiry.country.callingCodes[0] + enquiry.phone }}</i><br>
+      <i class="fas fa-map-marker-alt">&nbsp;{{ enquiry.address }}</i><br>
+      <i class="far fa-clock">&nbsp;{{ 'Submitted' + ' ' + TimeFromNow(enquiry.created) }}</i>
+      <i *ngIf="enquiry.completed != null" class="fas fa-check">&nbsp;{{ 'Completed' + ' ' + TimeFromNow(enquiry.completed) }}</i><br>
+      <h4>Message:&nbsp;</h4><i>{{ enquiry.message}}</i>
+    </mat-card-actions>
+  </mat-card>
+</mat-dialog-content>
+<div *ngIf="!enquiry.completed" class="notice">
+  NB: contact your client as soon as possible to validate details!
+</div>

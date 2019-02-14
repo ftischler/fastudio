@@ -1,0 +1,37 @@
+mat-spinner {
+  margin: auto;
+  width: 50%;
+}
+mat-card {
+  margin-bottom: 8px;
+  h5 {
+    color: red;
+    margin-left: 30%;
+  }
+}
+.img {
+  max-width: 200px;
+  max-height: 200px;
+}
+.close {
+  color: rgb(180, 23, 23);
+  margin: 0 20% 5px 80%;
+  border: none;
+}
+.design {
+  p {
+    font-size: 1.3em;
+    word-spacing: -0.1em;
+  }
+}
+.det {
+  font-size: 1.1rem;
+  line-height: 25px;
+  color: rgb(63, 62, 62);
+}
+.notice {
+  color: rgb(180, 23, 23);
+  background: rgb(243, 196, 196);
+  border-radius: 6px;
+  padding: 5px;
+}

@@ -1,0 +1,72 @@
+app-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.app-sidenav-container {
+  flex: 1;
+  position: relative;
+  top: 38px;
+  max-width: 100%;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s;
+}
+@-webkit-keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0px;
+    opacity: 1;
+  }
+}
+@keyframes animatebottom {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+.app-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-sidenav {
+  top: 38px !important;
+  width: 240px;
+  background: #d81b60b0;
+  -webkit-background: #d81b60b0 !important;
+  -moz-background: #d81b60b0 !important;
+  -o-background: #d81b60b0 !important;
+  -ms-background: #d81b60b0 !important;
+}
+.wrapper {
+  margin: 20px;
+}
+
+a {
+  color: white !important;
+  font-size: 1.1rem !important;
+
+  i {
+    color: white;
+    margin-right: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    margin: 5px;
+  }
+}

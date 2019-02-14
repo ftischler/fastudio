@@ -1,0 +1,50 @@
+<mat-spinner class="loading" color="accent" [diameter]="30" *ngIf="view == true"></mat-spinner>
+<div class="main" *ngIf="view == false">
+  <mat-toolbar>
+    <h3>Verified Designers</h3>
+  </mat-toolbar>
+  <mat-form-field>
+    <i matPrefix class="fas fa-search">&nbsp;</i>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+  <section>
+    <mat-spinner class="loading" color="accent" [diameter]="30" *ngIf="loading == true && dataSource == null"></mat-spinner>
+    <mat-card class="empty" *ngIf="loading == false && dataSource == null">
+      <h5>Can't process request at the moment, do check back later.</h5>
+    </mat-card>
+    <div *ngIf="dataSource != null && length != 0" class="table-container mat-elevation-z8">
+      <mat-table [dataSource]="dataSource">
+
+        <!-- designers Column -->
+        <ng-container matColumnDef="designer">
+          <mat-header-cell *matHeaderCellDef> Designer </mat-header-cell>
+          <mat-cell class="designer" *matCellDef="let designer">
+            <div class="name">
+              <span><i class="far fa-square" aria-hidden="true">&nbsp;</i></span>{{ designer.businessname }}
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <!-- location Column -->
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef> Location </mat-header-cell>
+          <mat-cell *matCellDef="let designer">{{ designer.state + ',' + ' ' + designer.country.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-cell *matCellDef="let designer">
+            <button mat-raised-button class="action" color="accent" (click)="view = true" routerLink="/studio/portfolio/{{designer.email}}/designs">
+              <i class="fas fa-briefcase" aria-hidden="true"> Portfolio</i>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="length" [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]" showFirstLastButtons></mat-paginator>
+    </div>
+  </section>
+</div>

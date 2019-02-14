@@ -1,0 +1,65 @@
+mat-spinner {
+  margin: auto;
+  width: 50%;
+}
+.loading {
+  height: 77vh;
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  width: 50%;
+}
+.more {
+  text-align: center;
+  margin: 10px;
+}
+.l_filter > mat-form-field {
+  max-width: 30%;
+  font-size: 0.8em !important;
+  margin-right: 20px;
+}
+.search > mat-form-field {
+  width: 90%;
+  font-size: 0.8em !important;
+}
+section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: auto;
+  grid-gap: 10px;
+  margin: 0 auto;
+  max-width: 95%;
+}
+mat-card {
+  margin: 5px 0;
+  border-radius: 10px !important;
+  h5 {
+    font-size: 1em;
+    color: red;
+    float: right;
+  }
+  img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    // width: 160px;
+    // height: 160px;
+  }
+  .cols {
+    line-height: 0.6em;
+  }
+}
+.empty {
+  margin: 10px;
+  text-align: center;
+  padding: auto;
+  .fas {
+    color: #aaaa;
+    font-size: 100px;
+  }
+}
+mat-card-actions {
+  button {
+    color: white !important;
+    margin-left: 14% !important;
+  }
+}
