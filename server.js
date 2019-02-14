@@ -6,7 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 
-const routes = require('./src/server/config/routes');
+const routes = require('./src/config/routes');
 const db = process.env.DB;
 
 mongoose.Promise = global.Promise;
@@ -24,7 +24,7 @@ const PORT = process.env.PORT  || 8080;
 // enablling socket-io
 const server = require('http').createServer(app);
 const io = require('socket.io').listen(server);
-require('./src/server/config/sockets')(io);
+require('./src/config/sockets')(io);
 
 // enablling middleware
 app.use(express.json({ limit: '50mb' }));
