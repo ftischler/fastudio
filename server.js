@@ -32,7 +32,8 @@ app.use(
   express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })
 );
 
-const whitelist = ['http://www.fastudio.com.ng', 'http://localhost:4200'];
+// cors config
+const whitelist = ['http://fastudio.com.ng', 'http://localhost:4200'];
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
@@ -42,6 +43,7 @@ const corsOptions = {
     }
   }
 }
+
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(logger('dev'));
