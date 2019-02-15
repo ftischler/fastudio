@@ -29,9 +29,20 @@ require('./src/config/sockets')(io);
 // enablling middleware
 app.use(express.json({ limit: '50mb' }));
 app.use(
-  express.urlencoded({ limit: '50mb', extended: true, parameterLimit: '50000' })
+  express.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 })
 );
-app.use(cors());
+
+const whitelist = ['http://www.fastudio.com.ng', 'http://localhost:4200'];
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(logger('dev'));
 app.use('/v1', routes);
@@ -47,6 +58,7 @@ app.get('/*', (req, res) => {
 app.use((req, res, next) => {
   const error = new Error('Not Found');
   error.message = 'Invaild route';
+  // @ts-ignore
   error.status = 404;
   next(error);
 });

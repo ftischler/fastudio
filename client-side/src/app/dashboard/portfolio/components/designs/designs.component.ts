@@ -71,6 +71,7 @@ export class DesignsComponent implements OnInit {
       });
     },
     err => {
+      this.loading = false;
       // calling the snackbar errorhandler
       this.errorHandler(err, 'failed to get user data');
     });
