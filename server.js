@@ -33,10 +33,10 @@ app.use(
 );
 
 // cors config
-const whitelist = ['http://www.fastudio.com.ng/', 'http://localhost:4200'];
+const whitelist = ['http://www.fastudio.com.ng', 'http://localhost:4200'];
 const corsOptions = {
   origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
