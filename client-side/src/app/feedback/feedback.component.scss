@@ -1,14 +1,14 @@
 .mat-spinner {
-    margin: 10px auto;
-  }
+  margin: 10px auto;
+}
 .success {
-  color: rgb(6, 252, 149);
+  color: rgb(6, 252, 149) !important;
   text-align: justify;
   padding: 2px;
   border: 5px dotted rgb(6, 252, 149);
 }
 .error {
-  color: red;
+  color: red !important;
   text-align: justify;
   padding: 2px;
   border: 5px dotted red;

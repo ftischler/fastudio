@@ -45,7 +45,7 @@ export class PasswordComponent implements OnInit {
         this.success = false;
         if (err instanceof HttpErrorResponse) {
           if (err.status === 400) {
-            this.sendError = err.error.message[0].message;
+            this.sendError = err.error.msg[0].message;
           } else {
            this.sendError = err.error.msg;
         }
@@ -80,13 +80,13 @@ export class PasswordComponent implements OnInit {
         <button mat-raised-button type="reset" [mat-dialog-close]="false">Close</button>
       </form>
       <div class="success" *ngIf="success == true">
-        <h4>Success! A password reset link has been sent to {{emailForm.controls.email.value}}<br>Check your mail inbox or spam to reset your password and access your portfolio.<br>Note: Your email may take a few minutes to arrive.</h4>
+        <i>Success! A password reset link has been sent to {{emailForm.controls.email.value}}<br>Check your mail inbox or spam to reset your password and access your portfolio.<br>Note: Your email may take a few minutes to arrive.</i>
       </div><br>
       <span *ngIf="click == true">
         <mat-spinner [diameter]="20"></mat-spinner>
       </span>
       <div class="error" *ngIf="sendError && success == false">
-        <h4>{{sendError}}</h4>
+        <i>{{sendError}}</i>
       </div><br>
     </mat-card>
   </mat-dialog-content>
@@ -96,13 +96,13 @@ export class PasswordComponent implements OnInit {
     margin: 10px auto;
   }
   .success {
-    color: rgb(6, 252, 149);
+    color: rgb(6, 252, 149) !important;
     text-align: center;
     padding: 2px;
     border: 5px dotted rgb(6, 252, 149);
   }
   .error {
-    color: red;
+    color: red !important;
     text-align: justify;
     padding: 2px;
     border: 5px dotted red;

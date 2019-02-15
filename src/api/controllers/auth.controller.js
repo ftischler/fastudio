@@ -18,16 +18,17 @@ module.exports = {
 	verifyToken(req, res, next) {
 		const request = req;
 		if (!req.headers.authorization) {
-			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request');
+			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request! Identify yourself');
 		}
 		const token = req.headers.authorization.split(' ')[1];
 		if (token === 'null') {
-			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request');
+			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request! Identify yourself');
 		}
 		const payload = jwt.verify(token, A_SECRET);
 		if (!payload) {
-			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request');
+			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request! Identify yourself');
 		}
+		// @ts-ignore
 		request.user = payload.data;
 		next();
 	},
@@ -48,6 +49,19 @@ module.exports = {
 			request.payloadData = decoded.data;
 			next();
 		});
+	},
+	// generate token for vistors
+	genToken(req, res) {
+		if(req.body.origin === 'fastudioNG') {
+		// configuring jwt
+		const payload = { data: req.body };
+		const token = jwt.sign(payload, A_SECRET);
+		return res
+			.status(HttpStatus.OK)
+			.json({ message: 'token generated successfully', token});
+		} else {
+			return res.status(HttpStatus.UNAUTHORIZED).send('Unauthorized request! Who are you please?');
+		}
 	},
 	// user registration
 	async createUser(req, res, next) {
@@ -170,7 +184,7 @@ module.exports = {
 		if (error && error.details) {
 			return res.status(HttpStatus.BAD_REQUEST).json({ message: error.details });
 		}
-		await User.findOne({ email: value.email }, {password: 0})
+		await User.findOne({ email: value.email })
 			.then(userData => {
 				if (!userData) {
 					return res

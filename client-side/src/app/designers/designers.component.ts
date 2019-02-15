@@ -44,7 +44,12 @@ export class DesignersComponent implements OnInit {
   getDesigners() {
     this.userService.getDesigners().subscribe(data => {
       this.loading = false;
-      this.dataSource = new MatTableDataSource(data.designers);
+      this.dataSource = new MatTableDataSource(data.designers.sort(function(a, b) {
+        const nameA = a.businessname.toLowerCase(), nameB = b.businessname.toLowerCase();
+        if (nameA < nameB) {  return -1; }
+        if (nameA > nameB) {  return 1; }
+        return 0;
+      }));
       this.dataSource.paginator = this.paginator;
       this.length = data.designers.length;
     },

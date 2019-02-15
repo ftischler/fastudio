@@ -6,6 +6,7 @@ import {
   HttpEvent
 } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { CountryService } from './country.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -34,7 +35,8 @@ import { Observable } from 'rxjs';
 //   }
 // }
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+
+  constructor(private injector: Injector) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -48,8 +50,16 @@ export class TokenInterceptorService implements HttpInterceptor {
         }
       });
       return next.handle(tokenizedReq);
+    } else if (authService.getJunks()) {
+      // access for visitors
+      const tokenizedReq = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authService.getJunks()}`
+        }
+      });
+      return next.handle(tokenizedReq);
+    } else {
+      return;
     }
-    return next.handle(req);
   }
-
 }

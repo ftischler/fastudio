@@ -1,10 +1,16 @@
-mat-toolbar > button {
-  margin-left: 45px;
-  .fas {
-    color: white;
+.header {
+  background: #eae9e98f !important;
+  box-shadow: #3333 0px 2px 2px 2px !important;
+  margin-bottom: 5px;
+  height: 50 !important;
+  border-radius: 15px !important;
+  button {
+    margin-left: 45px;
+    .fas {
+      color: white;
+    }
   }
-}
-mat-toolbar {
+
   span {
     color: #da3a75;
     background: rgba(247, 246, 246, 0.87);

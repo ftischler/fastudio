@@ -8,7 +8,7 @@ $iconWidth: 80px;
   margin-bottom: 10px;
   color: rgb(255, 254, 254);
   .overlay {
-    background: rgba(0, 0, 0, 0.603);
+    background: rgba(0, 0, 0, 0.54);
     padding: 20px;
   }
   .intro {
@@ -280,6 +280,10 @@ h4 {
 .link {
   color: blue;
   font-style: italic;
+}
+.regBtn {
+  margin-top: 8px !important;
+  margin-bottom: 5px !important;
 }
 // media view
 @media (max-width: 400px) {

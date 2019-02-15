@@ -7,7 +7,7 @@
     <h4><i class="fas fa-briefcase">&nbsp;Portfolio:&nbsp;{{designs[0].designer}}</i></h4>
   </mat-toolbar>
   <div class="details">
-    <u>Contact Details:</u>
+    <span><u>Contact Details:</u>&nbsp;<i>({{designs.length + ' items'}})</i></span>
     <h5><i class="fas fa-map-marker-alt">&nbsp;{{ designs[0].designerAddress }}</i></h5>
     <h5><i class="fas fa-globe-africa">&nbsp;{{ designs[0].designerCity + ',' + ' ' + designs[0].designerState + ',' + ' ' + designs[0].designerCountry.name }}</i></h5>
     <h5><i class="fas fa-mobile-alt">

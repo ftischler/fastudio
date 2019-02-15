@@ -22,7 +22,7 @@ export class UsersService {
     return this.httpClient.get<User>(`${BASE_URL}/users/email/${email}`);
   }
   resetPassword(token: any, body: any): Observable<any> {
-    return this.httpClient.put(`${BASE_URL}/users/${token}`, body);
+    return this.httpClient.put(`${BASE_URL}/users/passwordReset/${token}`, body);
   }
   updateUser(id: string, body: any): Observable<User> {
     return this.httpClient.put<User>(`${BASE_URL}/users/${id}`, body);

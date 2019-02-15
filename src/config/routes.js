@@ -9,13 +9,14 @@ const feedbackController = require('../api/controllers/feedback.controller');
 const passwordController = require('../api/controllers/password.controller');
 
 // Auths
-router.post('/registerUser', authController.createUser); //authorization token needed
-router.post('/login', authController.login); //authorization token needed
+router.post('/giveMeAccess', authController.genToken);
+router.post('/registerUser', authController.verifyToken, authController.createUser); //public endpoints
+router.post('/login', authController.verifyToken, authController.login); //public endpoints
 
 // Designs
 router.post('/designs', authController.verifyToken, designController.create);
-router.get('/designs/skip=:len', designController.findAll); //authorization token needed
-router.get('/designs/:id', designController.findOne); //authorization token needed
+router.get('/designs/skip=:len', authController.verifyToken, designController.findAll); //public endpoints
+router.get('/designs/:id', authController.verifyToken, designController.findOne); //public endpoints
 router.delete(
 	'/designs/:id',
 	authController.verifyToken,
@@ -23,12 +24,12 @@ router.delete(
 );
 router.put('/designs/:id', authController.verifyToken, designController.update);
 router.get(
-	'/designs/designersId=:id/skip=:len',
+	'/designs/designersId=:id/skip=:len', authController.verifyToken,
 	designController.findUsersDesign
-); //authorization token needed
+); //public endpoints
 
 // Enquires
-router.post('/enquiry', enquiryController.create); //authorization token needed
+router.post('/enquiry', authController.verifyToken, enquiryController.create); //public endpoints
 router.put(
 	'/enquiry/:id',
 	authController.verifyToken,
@@ -42,18 +43,18 @@ router.delete(
 
 // Users
 router.get('/users/:id', authController.verifyToken, userController.findUser);
-router.get('/users/all/designers', userController.findAll); //authorization token needed
-router.get('/users/email/:email', userController.findUserByEmail); //authorization token needed
+router.get('/users/all/designers', authController.verifyToken, userController.findAll); //public endpoints
+router.get('/users/email/:email', authController.verifyToken, userController.findUserByEmail); //public endpoints
 router.put('/users/:id', authController.verifyToken, userController.update);
 router.put(
-	'/users/:token',
+	'/users/passwordReset/:token',
 	authController.validateToken,
 	userController.resetPassword
 );
-router.post('/verifyMe/user/:email', userController.verifyMe); //authorization token needed
+router.post('/verifyMe/user/:email', userController.verifyMe); //public endpoints
 
 // Password
-router.post('/forgetPassword', passwordController.forgetPassword); //authorization token needed
+router.post('/forgetPassword', passwordController.forgetPassword); //public endpoints
 router.post(
 	'/updatePassword/userId/:id',
 	authController.verifyToken,
@@ -61,6 +62,6 @@ router.post(
 );
 
 // Feedback
-router.post('/feedback', feedbackController.create); //authorization token needed
+router.post('/feedback', authController.verifyToken, feedbackController.create); //public endpoints
 
 module.exports = router;

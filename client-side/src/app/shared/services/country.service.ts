@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { environment } from 'src/environments/environment';
 
+const BASE_URL = `${environment.BASE_URL}/v1`;
 @Injectable({
   providedIn: 'root'
 })
@@ -47,12 +48,21 @@ export class CountryService {
     'Yobe',
     'Zamfara'
   ];
+  body = {
+    user: 'visitor',
+    origin: 'fastudioNG'
+  };
+
   private httpClient: HttpClient;
   constructor(
     private handler: HttpBackend,
     private router: Router
   ) {
     this.httpClient = new HttpClient(handler);
+  }
+
+  requestToken(): Observable<any> {
+    return this.httpClient.post<any>(`${BASE_URL}/giveMeAccess`, this.body);
   }
 
   getCountries(): Observable<any> {

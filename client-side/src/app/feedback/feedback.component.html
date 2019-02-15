@@ -25,13 +25,13 @@
       </mat-form-field><br>
 
       <div class="success" *ngIf="success == true">
-        <h4>We appriciate your feedback. Thank You!</h4>
+        <i>We appriciate your feedback. Thank You!</i>
       </div><br>
       <span *ngIf="click == true">
         <mat-spinner [diameter]="20"></mat-spinner>
       </span>
       <div class="error" *ngIf="sendError && success == false">
-        <h4>{{sendError}}</h4>
+        <i>{{sendError}}</i>
       </div><br>
       <button mat-raised-button [disabled]="click == true ||feedbackForm.invalid" type="submit" color="accent">Submit</button>
     </form>

@@ -62,16 +62,16 @@ module.exports = {
 		const schema = Joi.object().keys({
 			currentPassword: Joi.string()
 				.min(8)
-				.required(),
+				.required().trim(),
 			newPassword: Joi.string()
 				.min(8)
-				.required(),
+				.required().trim(),
 			confirmPassword: Joi.string()
 				.valid(Joi.ref('newPassword'))
 				.required()
 				.options({
 					language: { any: { allowOnly: 'must match new password' } }
-				})
+				}).trim()
 		});
 		const { error, value } = Joi.validate(req.body, schema);
 		if (error && error.details) {

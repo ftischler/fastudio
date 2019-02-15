@@ -1,6 +1,6 @@
 <mat-spinner class="loading" color="accent" [diameter]="30" *ngIf="view == true"></mat-spinner>
 <div class="main" *ngIf="view == false">
-  <mat-toolbar>
+  <mat-toolbar class="header">
     <h3>Verified Designers</h3>
   </mat-toolbar>
   <mat-form-field>
@@ -17,7 +17,7 @@
 
         <!-- designers Column -->
         <ng-container matColumnDef="designer">
-          <mat-header-cell *matHeaderCellDef> Designer </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Designers </mat-header-cell>
           <mat-cell class="designer" *matCellDef="let designer">
             <div class="name">
               <span><i class="far fa-square" aria-hidden="true">&nbsp;</i></span>{{ designer.businessname }}

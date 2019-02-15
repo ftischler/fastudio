@@ -56,4 +56,8 @@ export class AuthService {
     }
       return;
   }
+  // access token
+  getJunks() {
+    return localStorage.getItem('junks');
+  }
 }

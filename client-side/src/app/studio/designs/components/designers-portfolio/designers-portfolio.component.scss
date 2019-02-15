@@ -46,10 +46,14 @@ mat-card {
   font-size: 1em;
   margin-left: 15px;
   padding-right: 5px;
-  margin-top: 0px;
+  margin-top: 5px;
 }
 .main {
   font-size: 1.1em;
+  height: 40px;
+  background: #f5f5f5e0 !important;
+  border-radius: 10px !important;
+  box-shadow: #3333 0px 2px 2px 2px;
 }
 .empty {
   margin: 30px 10px;

@@ -62,6 +62,8 @@ export class HomeComponent implements OnInit {
     this.submitted = true;
     this.authService.loginUser(this.loginForm.value).subscribe(
       data => {
+        // remove junks token
+        localStorage.removeItem('junks');
         // storing the generated token
         localStorage.setItem('token', data.token);
         this.router.navigate(['dashboard', 'portfolio']);
