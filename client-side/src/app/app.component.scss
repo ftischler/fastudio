@@ -5,7 +5,19 @@ app-toolbar {
   right: 0;
   z-index: 2;
 }
-
+.floatBtn {
+  position: fixed;
+  z-index: 2;
+  right: 15px;
+  bottom: 15px;
+  a {
+    color: white !important;
+    font-size: 1.7rem !important;
+  }
+  .fab {
+    padding-bottom: 15px !important;
+  }
+}
 .app-sidenav-container {
   flex: 1;
   position: relative;
@@ -50,19 +62,18 @@ app-toolbar {
   -moz-background: #d81b60b0 !important;
   -o-background: #d81b60b0 !important;
   -ms-background: #d81b60b0 !important;
+  a {
+    color: white !important;
+    font-size: 1.1rem !important;
+
+    i {
+      color: white;
+      margin-right: 0.5rem;
+    }
+  }
 }
 .wrapper {
   margin: 20px;
-}
-
-a {
-  color: white !important;
-  font-size: 1.1rem !important;
-
-  i {
-    color: white;
-    margin-right: 0.5rem;
-  }
 }
 
 @media (max-width: 600px) {

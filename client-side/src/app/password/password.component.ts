@@ -35,6 +35,7 @@ export class PasswordComponent implements OnInit {
   }
   onSubmit() {
     this.click = true;
+    this.sendError = null;
     this.userService.resetPassword(this.token, this.passwordForm.value).subscribe(
       data => {
         this.click = false;
