@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
+import { TokenService } from '../shared/services/token.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public tokenService: TokenService,
     private countryService: CountryService,
     private fb: FormBuilder,
     private router: Router,
@@ -62,10 +64,10 @@ export class HomeComponent implements OnInit {
     this.submitted = true;
     this.authService.loginUser(this.loginForm.value).subscribe(
       data => {
-        // remove junks token
-        localStorage.removeItem('junks');
+        // remove access token
+        // this.authService.deleteToken('access_token');
         // storing the generated token
-        localStorage.setItem('token', data.token);
+        this.authService.setToken('auth_token', data.token);
         this.router.navigate(['dashboard', 'portfolio']);
       },
       err => {
@@ -77,11 +79,9 @@ export class HomeComponent implements OnInit {
             this.loginForm.controls['password'].reset();
             this.error = err.error.msg;
             // calling the snackbar errorhandler
-            this.errorHandler(err, 'Registration failed');
+            this.errorHandler(err, 'Login failed');
           }
         }
-        // calling the snackbar errorhandler
-        this.errorHandler(err, 'Login failed');
       }
     );
   }

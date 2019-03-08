@@ -31,7 +31,7 @@ export class AppComponent implements OnDestroy {
     countryService.requestToken().subscribe(
       data => {
         // storing the generated token
-        localStorage.setItem('junks', data.token);
+        authService.setToken('access_token', data.token);
       }, err => {
         return;
       }

@@ -51,10 +51,10 @@ router.put(
 	authController.validateToken,
 	userController.resetPassword
 );
-router.post('/verifyMe/user/:email', userController.verifyMe); //public endpoints
+router.post('/verifyMe/user/:email', authController.verifyToken, userController.verifyMe); //public endpoints
 
 // Password
-router.post('/forgetPassword', passwordController.forgetPassword); //public endpoints
+router.post('/forgetPassword', authController.verifyToken, passwordController.forgetPassword); //public endpoints
 router.post(
 	'/updatePassword/userId/:id',
 	authController.verifyToken,

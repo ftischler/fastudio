@@ -21,7 +21,7 @@
         <a mat-list-item *ngIf="authService.loggedIn()" routerLink="/dashboard/enquiries"
           ><i class="fas fa-clipboard-list">&nbsp;</i>Enquiries</a
         >
-        <a mat-list-item *ngIf="authService.loggedIn() && authService.getCurrentUser().email == 'johnniexson@gmail.com'" routerLink="/designers"><i class="fas fa-user-tag">&nbsp;</i>Designers</a>
+        <a mat-list-item routerLink="/designers"><i class="fas fa-user-tag">&nbsp;</i>Designers</a>
         <a mat-list-item *ngIf="authService.loggedIn()" routerLink="/dashboard/designers-forum"><i class="fas fa-users">&nbsp;</i>Designers Forum</a
         >
         <a mat-list-item routerLink="/ratings"

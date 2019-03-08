@@ -56,6 +56,7 @@ module.exports = {
 		// configuring jwt
 		const payload = { data: req.body };
 		const token = jwt.sign(payload, A_SECRET);
+		// res.cookie('auth', token);
 		return res
 			.status(HttpStatus.OK)
 			.json({ message: 'token generated successfully', token});
@@ -209,6 +210,7 @@ module.exports = {
 						// configuring jwt
 						const payload = { data: userData };
 						const token = jwt.sign(payload, A_SECRET);
+						// res.cookie('auth', token);
 						return res
 							.status(HttpStatus.OK)
 							.json({ message: 'login successful', token, userData });

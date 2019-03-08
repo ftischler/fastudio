@@ -1,6 +1,13 @@
 # Fastudio
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
+This project was developed with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
+
+## Description
+Fastudio is a web based platform for all fashion designers across Africa to help setup a live global portfolio
+to showcase their amazing designs to the world and connecting them with their potential clients.
+Fastudio also makes life very easy for clients in the sense that you don't have to walk around the whole community before
+you can get a competent designer to get your job done. With fastudio, you sew on the go.
+
 
 ## Development server
 

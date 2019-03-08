@@ -35,26 +35,25 @@ import { Observable } from 'rxjs';
 //   }
 // }
 export class TokenInterceptorService implements HttpInterceptor {
-
-  constructor(private injector: Injector) { }
+  constructor(private injector: Injector) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const authService = this.injector.get(AuthService);
-    if (authService.getToken()) {
+    if (authService.getToken('auth_token')) {
       const tokenizedReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authService.getToken()}`
+          Authorization: `Bearer ${authService.getToken('auth_token')}`
         }
       });
       return next.handle(tokenizedReq);
-    } else if (authService.getJunks()) {
+    } else if (authService.getToken('access_token')) {
       // access for visitors
       const tokenizedReq = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${authService.getJunks()}`
+          Authorization: `Bearer ${authService.getToken('access_token')}`
         }
       });
       return next.handle(tokenizedReq);
