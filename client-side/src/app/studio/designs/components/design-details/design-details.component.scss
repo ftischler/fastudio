@@ -11,6 +11,7 @@ mat-card {
 }
 mat-form-field {
   max-width: 80%;
+  display: contents !important;
 }
 .close {
   color: rgb(180, 23, 23);
