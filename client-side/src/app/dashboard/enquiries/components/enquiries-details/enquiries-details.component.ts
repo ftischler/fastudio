@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-enquiries-details',

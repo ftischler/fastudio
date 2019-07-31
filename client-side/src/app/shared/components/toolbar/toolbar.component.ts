@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-toolbar',

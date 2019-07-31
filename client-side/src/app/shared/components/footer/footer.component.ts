@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { FeedbackComponent } from 'src/app/feedback/feedback.component';
-import { TermsComponent } from 'src/app/terms/terms.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FeedbackComponent } from '../../../feedback/feedback.component';
+import { TermsComponent } from '../../../terms/terms.component';
 
 @Component({
   selector: 'app-footer',

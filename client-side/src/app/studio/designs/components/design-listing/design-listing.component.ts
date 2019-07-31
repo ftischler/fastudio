@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
-import { DesignService } from 'src/app/shared/services/design.service';
+import { DesignService } from '../../../../shared/services/design.service';
 import { DesignDetailsComponent } from '../design-details/design-details.component';
-import { CountryService } from 'src/app/shared/services/country.service';
-import { environment } from 'src/environments/environment';
+import { CountryService } from '../../../../shared/services/country.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-design-listing',

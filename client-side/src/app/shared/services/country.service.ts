@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 const BASE_URL = `${environment.BASE_URL}/v1`;
 @Injectable({
@@ -54,10 +54,7 @@ export class CountryService {
   };
 
   private httpClient: HttpClient;
-  constructor(
-    private handler: HttpBackend,
-    private router: Router
-  ) {
+  constructor(private handler: HttpBackend, private router: Router) {
     this.httpClient = new HttpClient(handler);
   }
 
@@ -66,6 +63,8 @@ export class CountryService {
   }
 
   getCountries(): Observable<any> {
-    return this.httpClient.get('http://restcountries.eu/rest/v2/region/africa?fields=name;callingCodes;currencies;flag;demonym');
+    return this.httpClient.get(
+      'http://restcountries.eu/rest/v2/region/africa?fields=name;callingCodes;currencies;flag;demonym'
+    );
   }
 }

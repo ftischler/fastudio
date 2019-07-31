@@ -4,7 +4,7 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { FeedbackService } from '../shared/services/feedback.service';
 import { HttpErrorResponse } from '@angular/common/http';
 

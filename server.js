@@ -50,9 +50,9 @@ app.use(logger('dev'));
 app.use('/v1', routes);
 
 // enable for production
-app.use(express.static(path.join(__dirname, 'client-side/dist/fastudio')));
+app.use(express.static(path.join(__dirname, 'client-side/dist/browser')));
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client-side/dist/fastudio/index.html'));
+  res.sendFile(path.join(__dirname, 'client-side/dist/browser/index.html'));
 });
 
 

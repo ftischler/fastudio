@@ -1,12 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as io from 'socket.io-client';
-import { CountryService } from 'src/app/shared/services/country.service';
-import { UsersService } from 'src/app/shared/services/users.service';
-import { environment } from 'src/environments/environment';
+import { CountryService } from '../../../../shared/services/country.service';
+import { UsersService } from '../../../../shared/services/users.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-edit-profile',

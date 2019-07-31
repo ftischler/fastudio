@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsersService } from 'src/app/shared/services/users.service';
-import { DesignService } from 'src/app/shared/services/design.service';
-import { environment } from 'src/environments/environment';
+import { AuthService } from '../../../../shared/services/auth.service';
+import { UsersService } from '../../../../shared/services/users.service';
+import { DesignService } from '../../../../shared/services/design.service';
+import { environment } from '../../../../../environments/environment';
 import { DesignDetailsComponent } from '../design-details/design-details.component';
 
 @Component({

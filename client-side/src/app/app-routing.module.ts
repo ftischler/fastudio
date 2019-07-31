@@ -37,12 +37,12 @@ const routes: Routes = [
   },
   {
     path: 'studio',
-    loadChildren: './studio/studio.module#StudioModule'
+    loadChildren: () => import('./studio/studio.module').then(m => m.StudioModule)
     // data: { preload: true, delay: false }
   },
   {
     path: 'dashboard',
-    loadChildren: './dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard]
   },
   {

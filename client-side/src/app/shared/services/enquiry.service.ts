@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { Enquiry } from '../models/enquiry';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 // const BASE_URL = 'http://localhost:3000/v1';
 const BASE_URL = `${environment.BASE_URL}/v1`;

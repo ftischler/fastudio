@@ -4,14 +4,15 @@ import {
   FormBuilder,
   Validators
 } from '@angular/forms';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DesignService } from 'src/app/shared/services/design.service';
-import { EnquiryService } from 'src/app/shared/services/enquiry.service';
+import { DesignService } from '../../../../shared/services/design.service';
+import { EnquiryService } from '../../../../shared/services/enquiry.service';
 import * as io from 'socket.io-client';
 import { HttpErrorResponse } from '@angular/common/http';
-import { CountryService } from 'src/app/shared/services/country.service';
-import { environment } from 'src/environments/environment';
+import { CountryService } from '../../../../shared/services/country.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-design-details',

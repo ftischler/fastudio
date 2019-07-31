@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { UsersService } from 'src/app/shared/services/users.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { UsersService } from '../../shared/services/users.service';
 import { EditProfileComponent, ChangePasswordComponent } from './components/edit-profile/edit-profile.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile',

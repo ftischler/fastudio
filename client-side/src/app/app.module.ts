@@ -42,7 +42,7 @@ const responConfig = {
     DesignersComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserAnimationsModule,
     ResponsiveModule.forRoot(responConfig),
     ReactiveFormsModule,

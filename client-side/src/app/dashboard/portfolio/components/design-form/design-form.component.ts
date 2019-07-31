@@ -5,12 +5,13 @@ import {
   Validators
 } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DesignService } from 'src/app/shared/services/design.service';
+import { DesignService } from '../../../../shared/services/design.service';
 import * as io from 'socket.io-client';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../../environments/environment';
 
 // const URL = 'http://localhost:3000/v1/designs';
 const URL = `${environment.BASE_URL}/v1/designs`;
