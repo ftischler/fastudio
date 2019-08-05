@@ -10,13 +10,15 @@ const common_1 = require("@nestjs/common");
 const ng_universal_1 = require("@nestjs/ng-universal");
 const path_1 = require("path");
 const auth_controller_1 = require("./src/auth/auth.controller");
+const BROWSER_DIR = path_1.join(process.cwd(), 'dist/browser');
+ng_universal_1.applyDomino(global, path_1.join(BROWSER_DIR, 'index.html'));
 let ApplicationModule = class ApplicationModule {
 };
 ApplicationModule = __decorate([
     common_1.Module({
         imports: [
             ng_universal_1.AngularUniversalModule.forRoot({
-                viewsPath: path_1.join(process.cwd(), 'dist/browser'),
+                viewsPath: BROWSER_DIR,
                 bundle: require('../server/main'),
                 liveReload: true
             })

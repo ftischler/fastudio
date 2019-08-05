@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
-import * as io from 'socket.io-client';
-import _ from 'lodash';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { UsersService } from '../../../../shared/services/users.service';
 import { EnquiryService } from '../../../../shared/services/enquiry.service';
 import { Enquiry } from '../../../../shared/models/enquiry';
 import { EnquiriesDetailsComponent } from '../enquiries-details/enquiries-details.component';
 import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-enquiries-listing',
@@ -32,8 +31,11 @@ export class EnquiriesListingComponent implements OnInit {
               private authService: AuthService,
               private router: Router,
               private snackBar: MatSnackBar,
-              public dialog: MatDialog
-            ) { this.socket = io(environment.BASE_URL); }
+              public dialog: MatDialog,
+              private socketService: SocketService
+            ) {
+    this.socket = this.socketService.connect();
+  }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;

@@ -4,12 +4,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DesignFormComponent } from '../design-form/design-form.component';
-import * as io from 'socket.io-client';
 import * as moment from 'moment';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { UsersService } from '../../../../shared/services/users.service';
 import { DesignService } from '../../../../shared/services/design.service';
 import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-designs',
@@ -34,8 +34,9 @@ export class DesignsComponent implements OnInit {
     public designService: DesignService,
     private router: Router,
     private route: ActivatedRoute,
+    private socketService: SocketService,
     private snackBar: MatSnackBar) {
-    this.socket = io(environment.BASE_URL);
+    this.socket = this.socketService.connect();
   }
 
   ngOnInit() {

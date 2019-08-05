@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as io from 'socket.io-client';
 import * as moment from 'moment';
 import { DesignService } from '../../../../shared/services/design.service';
 import { DesignDetailsComponent } from '../design-details/design-details.component';
 import { CountryService } from '../../../../shared/services/country.service';
 import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-design-listing',
@@ -31,8 +31,9 @@ export class DesignListingComponent implements OnInit {
     public dialog: MatDialog,
     private designService: DesignService,
     private countryService: CountryService,
+    private socketService: SocketService,
     private snackBar: MatSnackBar) {
-    this.socket = io(environment.BASE_URL);
+    this.socket = this.socketService.connect();
   }
 
   ngOnInit() {

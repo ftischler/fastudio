@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as io from 'socket.io-client';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
-import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-enquiries-details',
@@ -16,7 +15,8 @@ export class EnquiriesDetailsComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<EnquiriesDetailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    ) { this.socket = io(environment.BASE_URL); }
+              private socketService: SocketService
+    ) { this.socket = this.socketService.connect(); }
 
   ngOnInit() {
     if (!this.data) {

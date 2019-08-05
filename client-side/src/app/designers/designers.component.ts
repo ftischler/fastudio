@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { HttpErrorResponse } from '@angular/common/http';
-import * as io from 'socket.io-client';
-import _ from 'lodash';
 import { AuthService } from '../shared/services/auth.service';
 import { UsersService } from '../shared/services/users.service';
-import { environment } from '../../environments/environment';
 import { User } from '../shared/models/user';
+import { SocketService } from '../shared/services/socket.service';
 
 @Component({
   selector: 'app-designers',
@@ -30,8 +27,11 @@ export class DesignersComponent implements OnInit {
               private authService: AuthService,
               private router: Router,
               private snackBar: MatSnackBar,
+              private socketService: SocketService,
               public dialog: MatDialog
-            ) { this.socket = io(environment.BASE_URL); }
+            ) {
+    this.socket = this.socketService.connect();
+  }
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   // @ViewChild(MatSort) sort: MatSort;

@@ -3,10 +3,10 @@
   <mat-sidenav-container class="app-sidenav-container">
     <mat-sidenav
       class="app-sidenav mat-elevation-z10"
-      [opened]="!isScreenSmall()"
+      [opened]="true"
       [fixedInViewport]="true"
       [fixedTopGap]="56"
-      [mode]="isScreenSmall() ? 'over' : 'side'"
+      mode="side"
       #sidenav
     >
       <mat-nav-list>

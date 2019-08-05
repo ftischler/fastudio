@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import * as io from 'socket.io-client';
 import { CountryService } from '../../../../shared/services/country.service';
 import { UsersService } from '../../../../shared/services/users.service';
 import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -31,8 +31,9 @@ export class EditProfileComponent implements OnInit {
     private userService: UsersService,
     private fb: FormBuilder,
     private router: Router,
-    private snackBar: MatSnackBar
-  ) { this.socket = io(environment.BASE_URL); }
+    private snackBar: MatSnackBar,
+    private socketService: SocketService
+  ) { this.socket = this.socketService.connect() }
 
   ngOnInit() {
     // this.getCountries();

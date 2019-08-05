@@ -1,9 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import * as io from 'socket.io-client';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
-import { environment } from '../../../../environments/environment';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -20,8 +19,9 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private router: Router,
     public authService: AuthService,
-    public userService: UsersService
-  ) { this.socket = io(environment.BASE_URL); }
+    public userService: UsersService,
+    private socketService: SocketService
+  ) { this.socket = this.socketService.connect();}
 
   ngOnInit() {
     this.loggedInUser = this.authService.getCurrentUser();

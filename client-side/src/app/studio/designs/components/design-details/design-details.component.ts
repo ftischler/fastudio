@@ -1,18 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators
-} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { DesignService } from '../../../../shared/services/design.service';
 import { EnquiryService } from '../../../../shared/services/enquiry.service';
-import * as io from 'socket.io-client';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CountryService } from '../../../../shared/services/country.service';
-import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 @Component({
   selector: 'app-design-details',
@@ -41,9 +36,10 @@ export class DesignDetailsComponent implements OnInit {
     public designService: DesignService,
     public enquiryService: EnquiryService,
     public countryService: CountryService,
+    private socketService: SocketService,
     private route: ActivatedRoute,
     ) {
-      this.socket = io(environment.BASE_URL);
+      this.socket = this.socketService.connect();
     }
   ngOnInit() {
     this.getCountries();

@@ -18,7 +18,7 @@ export class AuthService {
   auth_token: any;
 
   constructor(
-    @Inject(PLATFORM_ID) private platfrom: Object,
+    @Inject(PLATFORM_ID) private flatformId: Object,
     private httpClient: HttpClient,
     private cookieService: CookieService,
     private router: Router) { }
@@ -43,18 +43,20 @@ export class AuthService {
   }
 
   loggedIn() {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       return !!localStorage.getItem('auth_token');
+    } else {
+      return true;
     }
   }
   logoutUser() {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       localStorage.removeItem('auth_token');
       this.router.navigate(['/home']);
     }
   }
   getCurrentUser() {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       const token = localStorage.getItem('auth_token');
       let payload;
       if (token) {
@@ -66,7 +68,7 @@ export class AuthService {
   }
 
   setToken(token_name, token) {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       if (token_name === 'access_token') {
         this.access_token = token;
       // } else if (token_name === 'auth_token') {
@@ -77,7 +79,7 @@ export class AuthService {
     }
   }
   getToken(token_name) {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       if (token_name === 'access_token') {
         return this.access_token;
       // } else if (token_name === 'auth_token') {
@@ -88,7 +90,7 @@ export class AuthService {
     }
   }
   deleteToken(token_name) {
-    if (isPlatformBrowser(this.platfrom)) {
+    if (isPlatformBrowser(this.flatformId)) {
       if (token_name === 'access_token') {
         this.access_token = null;
         // } else if (token_name === 'auth_token') {

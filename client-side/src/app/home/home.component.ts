@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
   ];
   states: any;
   countries: any;
+  selected: any;
 
   constructor(
     public authService: AuthService,

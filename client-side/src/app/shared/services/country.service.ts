@@ -53,9 +53,7 @@ export class CountryService {
     origin: 'fastudioNG'
   };
 
-  private httpClient: HttpClient;
-  constructor(private handler: HttpBackend, private router: Router) {
-    this.httpClient = new HttpClient(handler);
+  constructor(private httpClient: HttpClient) {
   }
 
   requestToken(): Observable<any> {

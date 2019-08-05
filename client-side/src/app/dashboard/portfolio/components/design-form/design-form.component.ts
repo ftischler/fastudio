@@ -9,9 +9,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DesignService } from '../../../../shared/services/design.service';
-import * as io from 'socket.io-client';
-import { FileUploader, FileSelectDirective } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../../../../environments/environment';
+import { SocketService } from '../../../../shared/services/socket.service';
 
 // const URL = 'http://localhost:3000/v1/designs';
 const URL = `${environment.BASE_URL}/v1/designs`;
@@ -61,8 +61,9 @@ export class DesignFormComponent implements OnInit {
     private snackBar: MatSnackBar,
     public designService: DesignService,
     private route: ActivatedRoute,
+    private socketService: SocketService
     ) {
-      this.socket = io(environment.BASE_URL);
+      this.socket = this.socketService.connect();
     }
 
   ngOnInit() {

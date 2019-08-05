@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as io from 'socket.io-client';
 import * as moment from 'moment';
 import { AuthService } from '../../shared/services/auth.service';
 import { UsersService } from '../../shared/services/users.service';
-import { EditProfileComponent, ChangePasswordComponent } from './components/edit-profile/edit-profile.component';
-import { environment } from '../../../environments/environment';
+import { ChangePasswordComponent, EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { SocketService } from '../../shared/services/socket.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,8 +24,9 @@ export class ProfileComponent implements OnInit {
     public dialog: MatDialog,
     private authService: AuthService,
     private userService: UsersService,
+    private socketService: SocketService,
     private snackBar: MatSnackBar) {
-    this.socket = io(environment.BASE_URL);
+    this.socket = this.socketService.connect();
   }
 
   ngOnInit() {
